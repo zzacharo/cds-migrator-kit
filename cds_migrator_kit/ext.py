@@ -10,6 +10,8 @@
 
 from __future__ import absolute_import, print_function
 
+import os
+
 from . import config
 
 
@@ -24,6 +26,9 @@ class CdsMigratorKit(object):
     def init_app(self, app):
         """Flask application initialization."""
         self.init_config(app)
+        logs_path = app.config['CDS_MIGRATOR_KIT_LOGS_PATH']
+        if not os.path.exists(logs_path):
+            os.makedirs(logs_path)
         app.extensions['cds-migrator-kit'] = self
 
     def init_config(self, app):
