@@ -378,3 +378,18 @@ base_path = os.path.dirname(os.path.realpath(__file__))
 logs_dir = os.path.join(base_path, "tmp/logs/")
 CDS_MIGRATOR_KIT_LOGS_PATH = logs_dir
 CDS_MIGRATOR_KIT_STREAM_CONFIG = "cds_migrator_kit/rdm/migration/streams.yaml"
+
+CDS_MIGRATOR_KIT_RECORD_STATS_STREAM_CONFIG = dict(
+    ####### Search ##############
+    SRC_SEARCH_URL="https://os-cds-legacy.cern.ch:443/os",
+    SRC_SEARCH_AUTH=(
+        "cds",
+        f"{os.environ.get('CDS_MIGRATOR_KIT_SRC_SEARCH_AUTH', '')}",
+    ),
+    SRC_SEARCH_SIZE=5000,
+    SRC_SEARCH_SCROLL="1h",
+    DEST_SEARCH_INDEX_PREFIX="cds-rdm-events-stats",
+    DEST_SEARCH_URL="http://127.0.0.1:9200/",
+    DEST_SEARCH_AUTH=("", ""),
+)
+"""Config for record statistics migration."""
